@@ -16,6 +16,7 @@ jobs:
       - name: Upload components to the component service
         uses: espressif/github-actions/upload_components@master
         with:
-          directories: "components/test_comp;components/test_comp2"
+          directories: "components/test_comp"
+          name: "test_comp"
           namespace: "espressif"
           api_token: ${{ secrets.IDF_COMPONENT_API_TOKEN }}

@@ -24,7 +24,8 @@ jobs:
           python -c "import idf_component_manager; print(idf_component_manager.__file__)"
       - name: upload
         run: |
-          export COMPONENTS_DIRECTORIES="components/test_comp;components/test_comp2"
+          export COMPONENTS_DIRECTORIES="components/test_comp"
           export COMPONENTS_NAMESPACE="espressif"
+          export COMPONENT_NAME="test_comp"
           export IDF_COMPONENT_API_TOKEN="${{ secrets.IDF_COMPONENT_API_TOKEN }}"
           bash upload.sh
