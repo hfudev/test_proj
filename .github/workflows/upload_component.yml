@@ -12,19 +12,10 @@ jobs:
       - uses: actions/checkout@master
         with:
           submodules: "recursive"
-      - name: check server connection
-        run: |
-          curl ${{ secrets.API_ENDPOINT }} | grep "Espressif Component Manager"
-      - name: install dependencies
-        run: |
-          pip install idf-component-manager
-      - name: test file location
-        run: |
-          which python
-          python -c "import idf_component_manager; print(idf_component_manager.__file__)"
-      - name: upload
-        run: |
-          export COMPONENTS_DIRECTORIES="components/test_comp;components/test_comp2"
-          export COMPONENTS_NAMESPACE="espressif"
-          export IDF_COMPONENT_API_TOKEN="${{ secrets.IDF_COMPONENT_API_TOKEN }}"
-          bash upload.sh
+
+      - name: Upload components to the component service
+        uses: espressif/github-actions/upload_components@master
+        with:
+          directories: "components/test_comp;components/test_comp2"
+          namespace: "espressif"
+          api_token: ${{ secrets.IDF_COMPONENT_API_TOKEN }}
